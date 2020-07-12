@@ -1,36 +1,38 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import {
+  Switch,
+  Link,
+  Route,
+  withRouter,
+  HashRouter as Router,
+} from "react-router-dom";
+import Home from "./Home";
 import Users from "./Users";
+import "./App.css";
+import About from "./About";
+
+const LocationDisplay = withRouter(({ location }) => (
+  <div data-testid="location-display">{location.pathname}</div>
+));
 
 function App() {
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(true);
-  };
-
   return (
-    <div className="App">
-      {open ? (
-        <Users />
-      ) : (
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" data-testid="image" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <button onClick={handleClick}>Fetch</button>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Link to="/">Home</Link>
+        <br />
+        <Link to="/about">About</Link>
+        <br />
+        <Link to="/users">Users</Link>
+        <br />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/users" component={Users} />
+        </Switch>
+        <LocationDisplay />
+      </div>
+    </Router>
   );
 }
 

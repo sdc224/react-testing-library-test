@@ -2,7 +2,7 @@ import React from "react";
 import { render, waitForElement, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import axios from "axios";
-import Users, { url } from "./Users";
+import Users, { url } from "../Users";
 
 afterEach(() => {
   axios.get.mockClear();
